@@ -14,7 +14,7 @@ def select_random_word(words):
 
 def select_random_letter_from(word):
     random_index = random.randint(0, len(word) - 1)
-    letter = word[random_index]
+    letter = word[random_index].strip()
     print('Guess the word: ' + word[:random_index] + "_" + word[random_index+1:])
     return letter, random_index
 

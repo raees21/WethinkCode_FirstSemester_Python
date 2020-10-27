@@ -10,6 +10,7 @@ def read_file(file_name):
 
     #save file contents as a list
     list = file.readlines()
+    file.close()
     #return the list
     return list
     
@@ -24,7 +25,7 @@ def select_random_word(words):
     randomword = random.randint(0, lengthwords)
 
     #make words[0] the random word.
-    words[0] = words[randomword]
+    words[0] = words[randomword].strip()
 
     #find a random letter in word[0] by getting the length and finding a random rumber,
     #minus length by one because arrays/lists start from 0
