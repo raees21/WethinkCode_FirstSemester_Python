@@ -1,4 +1,17 @@
-import maze.obstacles as obstacle
+import sys
+import turtle
+from import_helper import dynamic_import as importer
+
+maze_list = ["raees_maze", "violet_maze", "kayden", "nathi", "kimchi"]
+
+if len(sys.argv) == 3 and sys.argv[2] in maze_list:
+    obstacle = importer("maze."+sys.argv[2])
+elif len(sys.argv) == 3:
+    obstacle = importer("maze"+".obstacles")
+    print(sys.argv)
+else:
+    obstacle = importer("maze.obstacles")
+
 
 # variables tracking position and direction
 position_x = 0
@@ -61,10 +74,11 @@ def show_position(robot_name):
     print(' > '+robot_name+' now at position ('+str(position_x)+','+str(position_y)+').')
 
 
-def print_obstacles():
+def print_obstacles(robot_name):
     """Prints an obstacle list for the user"""
 
     if obstacle.get_obstacles() != []:
+        print(robot_name+": Loaded obstacles.")
         print("There are some obstacles:")
         for i in range(len(obstacle.obstacles)):
             print(f"- At position {obstacle.obstacles[i][0]},{obstacle.obstacles[i][1]} (to {obstacle.obstacles[i][0]+4},{obstacle.obstacles[i][1]+4})")

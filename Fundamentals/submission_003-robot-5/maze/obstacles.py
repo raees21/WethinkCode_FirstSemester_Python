@@ -49,14 +49,11 @@ def is_path_blocked(x1,y1,x2,y2):
 
     for i in range(len(x_values)):
         if y1 == y2 and y1 == y_values[i]:
-            if x2 < x1 and x2 < x_values[i] and is_position_blocked(x2,y2) == False:
+            if x2 < x1 and x2 < x_values[i] and x_values[i] < x1 and is_position_blocked(x2,y2) == False:
                 return True
-            if x2 > x1 and x2 > x_values[i] and is_position_blocked(x2,y2) == False:
+            if x2 > x1 and x2 > x_values[i]and x_values[i] > x1 and is_position_blocked(x2,y2) == False:
                 return True
 
     return False
 
 
-
-def create_random_obstacles():
-    pass

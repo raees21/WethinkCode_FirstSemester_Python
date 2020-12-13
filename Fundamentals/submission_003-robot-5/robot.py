@@ -1,22 +1,26 @@
 import random
 import sys
+import maze.mazerunner as runner
 
-if len(sys.argv) == 2 and sys.argv[1] == "turtle":
+if len(sys.argv) >= 2 and sys.argv[1] == "turtle":
     import world.turtle.world as world
 else:
     import world.text.world as world
     
 
+
 # list of valid command names
-valid_commands = ['off', 'help', 'replay', 'forward', 'back', 'right', 'left', 'sprint']
+valid_commands = ['off', 'help', 'replay', 'forward', 'back', 'right', 'left', 'sprint', "mazerun"]
+
 move_commands = valid_commands[3:]
 
-
 #commands history
+
 history = []
 
-
 def get_robot_name():
+    """Gets the robot name and returns it"""
+
     name = input("What do you want to name your robot? ")
     while len(name) == 0:
         name = input("What do you want to name your robot? ")
@@ -69,6 +73,10 @@ def valid_command(command):
     """
 
     (command_name, arg1) = split_command_input(command)
+    mazerun_list = ['top', "bottom", 'left', 'right']
+    if command_name.lower() == 'mazerun':
+        if arg1 in mazerun_list:
+            return command_name.lower() and arg1
 
     if command_name.lower() == 'replay':
         if len(arg1.strip()) == 0:
@@ -165,6 +173,56 @@ def do_left_turn(robot_name):
     return True, ' > '+robot_name+' turned left.'
 
 
+def mazerunner(robot_name, command_arg):
+
+    if command_arg == "":
+        print("starting maze run..")
+
+        runner.maze_run(robot_name, command_arg)
+
+        print("I am at the top edge")
+
+        return True, ""
+
+    if command_arg == "top":
+        print("starting maze run..")
+
+        runner.maze_run_top(robot_name, command_arg)
+
+        print("I am at the top edge")
+
+        return True, ""
+    
+
+    if command_arg == "bottom":
+        print("starting maze run..")
+
+        runner.maze_run_bottom(robot_name, command_arg)
+
+        print("I am at the bottom edge")
+
+        return True, ""
+
+    if command_arg == "left":
+        print("starting maze run..")
+
+        runner.maze_run_left(robot_name, command_arg)
+
+        print("I am at the left edge")
+
+        return True, ""
+
+    if command_arg == "right":
+        print("starting maze run..")
+
+        runner.maze_run_right(robot_name, command_arg)
+
+        print("I am at the right edge")
+
+        return True, ""
+
+
+
 def do_sprint(robot_name, steps):
     """
     Sprints the robot, i.e. let it go forward steps + (steps-1) + (steps-2) + .. + 1 number of steps, in iterations
@@ -236,6 +294,8 @@ def do_replay(robot_name, arguments):
 def call_command(command_name, command_arg, robot_name):
     """Cals a specific command"""
 
+    print(command_name)
+    print(command_arg)
     if command_name == 'help':
         return do_help()
     elif command_name == 'forward':
@@ -250,6 +310,8 @@ def call_command(command_name, command_arg, robot_name):
         return do_sprint(robot_name, int(command_arg))
     elif command_name == 'replay':
         return do_replay(robot_name, command_arg)
+    elif command_name == 'mazerun':
+        return mazerunner(robot_name, command_arg)
     return False, None
 
 
@@ -268,7 +330,6 @@ def handle_command(robot_name, command):
     else:
         (do_next, command_output) = call_command(command_name, arg, robot_name)
 
-    print(command_output)
     world.show_position(robot_name)
     add_to_history(command)
 
@@ -295,7 +356,7 @@ def robot_start():
 
     world.reset_obstacles_global()
 
-    world.print_obstacles()
+    world.print_obstacles(robot_name)
 
     world.position_x = 0
     world.position_y = 0

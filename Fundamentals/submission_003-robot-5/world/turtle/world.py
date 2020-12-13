@@ -1,8 +1,18 @@
 import sys
 import turtle
-import robot
-import maze.raees_maze as obstacle
-    
+from import_helper import dynamic_import as importer
+
+maze_list = ["raees_maze", "violet_maze", "kayden", "nathi", "kimchi"]
+
+if len(sys.argv) == 3 and sys.argv[2] in maze_list:
+    obstacle = importer("maze."+sys.argv[2])
+elif len(sys.argv) == 3:
+    obstacle = importer("maze"+".obstacles")
+    print(sys.argv)
+else:
+    obstacle = importer("maze.obstacles")
+
+
 
 # variables tracking position and direction
 position_x = 0
@@ -13,6 +23,8 @@ current_direction_index = 0
 # area limit vars
 min_y, max_y = -200, 200
 min_x, max_x = -100, 100
+robot_name = ""
+
 
 # turtle initialisation
 screen = turtle.getscreen()
@@ -20,6 +32,7 @@ board = turtle.Turtle()
 turtle.setworldcoordinates(-300, -300, 300, 300)
 turtle.setheading(90)
 turtle.tracer(n=1, delay=0) 
+turtle.delay(0)
 
 
 def is_position_allowed(new_x, new_y):
@@ -30,7 +43,7 @@ def is_position_allowed(new_x, new_y):
     :return: True if allowed, i.e. it falls in the allowed area, else False
     """
     return min_x <= new_x <= max_x and min_y <= new_y <= max_y
-
+    #return True
 
 def update_position(steps):
     """
@@ -62,19 +75,20 @@ def update_position(steps):
     elif directions[current_direction_index] == 'left':
         new_x = new_x - steps
 
-    if obstacle.is_position_blocked(new_x,new_y) == True:
-        print("position")
-        return False
+    if len(sys.argv) == 2:
+        if obstacle.is_position_blocked(new_x,new_y) == True:
+            return False
 
-    if obstacle.is_path_blocked(position_x,position_y,new_x,new_y) == True:
-        print("path")
-        return False
+        if obstacle.is_path_blocked(position_x,position_y,new_x,new_y) == True:
+            return False
 
     if is_position_allowed(new_x, new_y):
         position_x = new_x
         position_y = new_y
         return True
     return False
+
+
 
 
 def show_position(robot_name):
@@ -84,10 +98,11 @@ def show_position(robot_name):
     turtle.setposition(position_x, position_y)
 
 
-def print_obstacles():
+def print_obstacles(robot_name):
     """Prints an obstacle list for the user"""
-
+    print(sys.argv[0])
     if obstacle.get_obstacles() != []: 
+        print(robot_name+": Loaded obstacles.")
         print("There are some obstacles:")
         for i in range(len(obstacle.obstacles)):
             print(f"- At position {obstacle.obstacles[i][0]}, {obstacle.obstacles[i][1]} (to {obstacle.obstacles[i][0]+4},{obstacle.obstacles[i][1]+4})")
@@ -131,9 +146,6 @@ def draw_rectangle(board,x,y,width,height,size,color):
 
 draw_rectangle(board,-100,200,200,400,2,"red")
 
-def setup_world():
-    pass
-
 def draw_obstacles(x, y):
     """Draws a square filled in, used for obstacles"""
 
@@ -143,13 +155,14 @@ def draw_obstacles(x, y):
     t.setposition(x, y)
     t.fillcolor('black')
     t.speed(0)
+    #t.tracer(n=1, delay=0)
 
     t.pendown()
     
     t.begin_fill()
 
     for i in range(4):
-        t.forward(5)
+        t.forward(4)
         t.right(90)
 
     t.end_fill()  
