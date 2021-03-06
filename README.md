@@ -1,4 +1,4 @@
-WeThinkCode_Funamentals
+WeThinkCode_Fundamentals
 1st Semester @WeThinkCode_
 
 1. The Basics:
