@@ -7,38 +7,38 @@ WeThinkCode_Fundamentals
  
 2. Making Decisions:
 
- Hangman - Iteration 2
+ - Hangman - Iteration 2
  
 3. Repeating Instructions:
 
- Problem - Pyramid
- Hangman - Iteration 3
+ - Problem - Pyramid
+ - Hangman - Iteration 3
  
 4. Structuring Data:
 
- Problem - Outline
- Mastermind - Iteration 1
+ - Problem - Outline
+ - Mastermind - Iteration 1
  
 5. Combining Instructions:
 
 5.1. Procedures:
 
- Toy Robot - Iteration 1
- Mastermind - Iteration 2
+ - Toy Robot - Iteration 1
+ - Mastermind - Iteration 2
  
 5.2. Simple Compute:
 
- Mastermind - Iteration 3
+ - Mastermind - Iteration 3
  
 5.3. Calling Functions:
 
- Problem - Recursion
- Toy Robot - Iteration 2
+ - Problem - Recursion
+ - Toy Robot - Iteration 2
  
 6. Processing Collections:
 
- Problem - Word Processing
- Toy Robot - Iteration 3
+ - Problem - Word Processing
+ - Toy Robot - Iteration 3
  
 7. Modules & Packages:
 
