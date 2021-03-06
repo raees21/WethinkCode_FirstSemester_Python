@@ -42,6 +42,6 @@ WeThinkCode_Fundamentals
  
 7. Modules & Packages:
 
- Problem - Accounting App
- Toy Robot - Iteration 4
- Toy Robot - Iteration 5
+ - Problem - Accounting App
+ - Toy Robot - Iteration 4
+ - Toy Robot - Iteration 5
