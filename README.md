@@ -3,7 +3,7 @@ WeThinkCode_Fundamentals
 
 1. The Basics:
 
- Hangman - Iteration 1
+ - Hangman - Iteration 1
  
 2. Making Decisions:
 
